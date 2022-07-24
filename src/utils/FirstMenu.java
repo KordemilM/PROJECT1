@@ -13,10 +13,10 @@ public class FirstMenu {
             System.out.println("1-Follow" + "\n" +"2-User suggestion" + "\n" + "3-Back");
             switch (Integer.parseInt(Menu.scanner.next())){
                 case 1:
-                    Follow.following(connection);
+                    Follow.follower(connection);
                     break;
                 case 2:
-                    System.out.println("456");
+                   Follow.userSuggestion(connection);
                     break;
                 default:
                     Menu.run(connection);

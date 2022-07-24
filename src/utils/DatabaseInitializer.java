@@ -32,7 +32,7 @@ public class DatabaseInitializer {
         statement.executeUpdate("CREATE TABLE IF NOT EXISTS " +
                 "follow (id int NOT NULL AUTO_INCREMENT," +
                 "fromId varchar(255) NOT NULL," +
-                "told varchar(255) NOT NULL," +
+                "toId varchar(255) NOT NULL," +
                 "PRIMARY KEY (id))");
         statement.close();
     }

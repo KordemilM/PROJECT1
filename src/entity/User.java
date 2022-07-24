@@ -79,10 +79,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User :" + '\n' +
                 "name = " + name + '\n' +
                 "userName = " + userName + '\n' +
-                "bio = " + bio + '\n' +
-                '}';
+                "bio = " + bio ;
     }
 }
