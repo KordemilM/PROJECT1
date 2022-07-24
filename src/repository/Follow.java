@@ -73,7 +73,6 @@ public class Follow {
             arrayList.add(resultSet.getString(3));
         }
 
-
         for (String s : arrayList) {
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHRE fromId = ? " +
                     "AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");

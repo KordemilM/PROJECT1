@@ -109,15 +109,19 @@ public class UserRepository {
             System.out.println("Forgot password?");
             string = Menu.scanner.next();
             if (string.equalsIgnoreCase("yes")) {
-                System.out.println("****** ?");
+                System.out.println("in which primary school did you start your first grade?");
                 answer = Menu.scanner.next();
                 if (!answer.equalsIgnoreCase(resultSet.getString(4))) {
                     System.out.println("Your answer is not correct");
                     return 1;
                 } else {
-                    System.out.println("new password :");
-                    password = Menu.scanner.next();
-
+                    while (true){
+                        System.out.println("new password :");
+                        password = Menu.scanner.next();
+                        if(password.length()>=8 && password.matches("\\w+")){
+                            break;
+                        }
+                    }
                     PreparedStatement preparedStatement1 = connection.prepareStatement("update user set " +
                             "pass_word=? WHERE user_name=?");
                     preparedStatement1.setString(1, password);
@@ -130,6 +134,9 @@ public class UserRepository {
                 password = Menu.scanner.next();
                 if (password.equals(resultSet.getString(3))) {
                     return 0;
+                }else {
+                    System.out.println("Your password is not correct");
+                    return 1;
                 }
             }
         }
