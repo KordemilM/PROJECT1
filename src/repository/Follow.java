@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.prefs.Preferences;
 
 public class Follow {
@@ -59,7 +60,7 @@ public class Follow {
     }
 
     public static void userSuggestion(Connection connection) throws SQLException {
-        ArrayList<String> arrayList = new ArrayList<>();
+        HashMap<String,Integer> map = new HashMap<>();
         Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
         String id = userPreferences.get("id", "");
 
@@ -69,20 +70,23 @@ public class Follow {
         preparedStatement.setString(1,id);
         preparedStatement.setString(2,id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()){
-            arrayList.add(resultSet.getString(3));
+        while (resultSet.next()){
+            map.put(resultSet.getString(3),0);
         }
 
-        for (String s : arrayList) {
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHRE fromId = ? " +
+        for (String s : map.keySet()) {
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE fromId = ? " +
                     "AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
             preparedStatement1.setString(1,s);
             preparedStatement1.setString(2,id);
             ResultSet resultSet1 = preparedStatement1.executeQuery();
-            //if(resultSet1.next()){
-                System.out.println(resultSet1.getFetchSize());
-            //}
+            if(resultSet1.next()){
+                map.put(s,resultSet1.getInt(1));
+            }
         }
+        ArrayList<String> list = new ArrayList<>(map.keySet());
+        list.sort((o1, o2) -> Integer.compare(map.get(o2), map.get(o1)));
+        System.out.println(list);
     }
 
     public static int numberOfFollowers(Connection connection,String username) throws SQLException {
