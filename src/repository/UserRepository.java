@@ -12,15 +12,16 @@ public class UserRepository {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
         int age;
         User user = new User();      BusinessAccount businessAccount = new BusinessAccount();
-        System.out.println("name :");  String name = Menu.scanner.next();
+        System.out.println("name : ");  String name = Menu.scanner.next();
         while (true){
             System.out.println("username :");
             username = Menu.scanner.next();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name='" + username + "'");
-            if(!resultSet.next()){
+            if(!resultSet.next() && username.matches("\\w+")){
                 break;
             }
+            System.out.println("a user exists with this username");
         }
         while (true){
             System.out.println("password :");
@@ -102,7 +103,6 @@ public class UserRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()) {
-
             Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
             userPreferences.put("id", username);
 
