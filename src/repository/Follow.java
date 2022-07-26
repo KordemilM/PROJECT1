@@ -44,7 +44,7 @@ public class Follow {
     }
 
     public static boolean addFollower(Connection connection, User user) throws SQLException {
-        Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+        Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
         String id = userPreferences.get("id", "");
 
         if(findFollow(connection,id,user.getUserName())) {
@@ -61,7 +61,7 @@ public class Follow {
 
     public static void userSuggestion(Connection connection) throws SQLException {
         HashMap<String,Integer> map = new HashMap<>();
-        Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+        Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
         String id = userPreferences.get("id", "");
 
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId IN " +

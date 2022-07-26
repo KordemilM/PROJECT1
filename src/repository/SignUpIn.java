@@ -5,7 +5,7 @@ import utils.Menu;
 import java.sql.*;
 import java.util.prefs.Preferences;
 
-public class UserRepository {
+public class SignUpIn {
 
     public static void signUp(Connection connection) throws SQLException {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
@@ -102,7 +102,7 @@ public class UserRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()) {
-            Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+            Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
             userPreferences.put("id", username);
 
             System.out.println("Forgot password?");
