@@ -66,24 +66,25 @@ public class Follow {
 
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId IN " +
                 "(SELECT toId FROM follow WHERE fromId = ?)" +
-                " AND toId NOT IN (SELECT toId FROM follow WHERE fromId = ?)");
+                " AND toId NOT IN (SELECT toId FROM follow WHERE fromId = ?) AND toId!=?");
         preparedStatement.setString(1,id);
         preparedStatement.setString(2,id);
+        preparedStatement.setString(3,id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
             map.put(resultSet.getString(3),0);
         }
 
         //SELECT COUNT(*) FROM follow WHERE fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
-        //SELECT COUNT(*) FROM follow WHERE " +
-        //                    "(fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
+        //SELECT COUNT(*) FROM follow WHERE (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
 
         for (String s : map.keySet()) {
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE" +
-                    " fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE"+
+                    " (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
             preparedStatement1.setString(1,s);
-            preparedStatement1.setString(2,id);
-            //preparedStatement1.setString(3,id);
+            preparedStatement1.setString(2,s);
+            preparedStatement1.setString(3,id);
+
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if(resultSet1.next()){
                 map.put(s,resultSet1.getInt(1));
@@ -117,7 +118,8 @@ public class Follow {
     }
 
     public static boolean findFollow(Connection connection,String fromId,String toId) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId=? AND toId=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId=? " +
+                "AND toId=?");
         preparedStatement.setString(1, fromId);
         preparedStatement.setString(2, toId);
         ResultSet resultSet = preparedStatement.executeQuery();

@@ -1,7 +1,6 @@
 package utils;
 
 import repository.Follow;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -22,6 +21,5 @@ public class FirstMenu {
                     Menu.run(connection);
             }
         }
-
     }
 }

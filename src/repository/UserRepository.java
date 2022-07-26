@@ -11,7 +11,8 @@ public class UserRepository {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
         int age;
         User user = new User();
-        System.out.println("name : ");  String name = Menu.scanner.next();
+        System.out.println("name : ");
+        String name = Menu.scanner.next();
         while (true){
             System.out.println("username :");
             username = Menu.scanner.next();
@@ -83,15 +84,16 @@ public class UserRepository {
         preparedStatement.setString(1,user.getName());     preparedStatement.setString(2,user.getUserName());
         preparedStatement.setString(3,user.getPassword()); preparedStatement.setString(4,user.getSecurityResponse());
         preparedStatement.setString(5,user.getEmail());    preparedStatement.setString(6,user.getPhoneNumber());
-        preparedStatement.setInt(7,user.getAccount());
-        preparedStatement.setInt(8,user.getAge());        preparedStatement.setString(9,user.getBio());
+        preparedStatement.setInt(7,user.getAccount());     preparedStatement.setInt(8,user.getAge());
+        preparedStatement.setString(9,user.getBio());
         preparedStatement.executeUpdate();
 
         System.out.println("sign up was successful");
+        System.out.println("<------------------------->");
     }
 
     public static int login(Connection connection) throws SQLException {
-        String username , password , string , answer;
+        String username , password , string , answer , repeatPassword;
         System.out.println("username :");
         username = Menu.scanner.next();
 
@@ -119,17 +121,26 @@ public class UserRepository {
                             break;
                         }
                     }
+                    while (true){
+                        System.out.println("repeat password:");
+                        repeatPassword = Menu.scanner.next();
+                        if(repeatPassword.equals(password)){
+                            break;
+                        }
+                    }
                     PreparedStatement preparedStatement1 = connection.prepareStatement("update user set " +
                             "pass_word=? WHERE user_name=?");
                     preparedStatement1.setString(1, password);
                     preparedStatement1.setString(2, username);
                     preparedStatement1.executeUpdate();
+                    System.out.println("<------------------------->");
                     return 0;
                 }
             } else {
                 System.out.println("password :");
                 password = Menu.scanner.next();
                 if (password.equals(resultSet.getString(3))) {
+                    System.out.println("<------------------------->");
                     return 0;
                 }else {
                     System.out.println("Your password is not correct");
@@ -140,5 +151,4 @@ public class UserRepository {
         System.out.println("no user exists with this username");
         return 1;
     }
-
 }

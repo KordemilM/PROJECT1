@@ -9,7 +9,6 @@ public class DatabaseInitializer {
     public void createTables(Connection connection) throws SQLException {
         userTable(connection.createStatement());
         followTable(connection.createStatement());
-
     }
 
     private void userTable(Statement statement) throws SQLException {
