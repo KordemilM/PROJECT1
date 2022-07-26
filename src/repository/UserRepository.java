@@ -1,6 +1,5 @@
 package repository;
 
-import entity.BusinessAccount;
 import entity.User;
 import utils.Menu;
 import java.sql.*;
@@ -11,17 +10,18 @@ public class UserRepository {
     public static void signUp(Connection connection) throws SQLException {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
         int age;
-        User user = new User();      BusinessAccount businessAccount = new BusinessAccount();
+        User user = new User();
         System.out.println("name : ");  String name = Menu.scanner.next();
         while (true){
             System.out.println("username :");
             username = Menu.scanner.next();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name='" + username + "'");
+            if(resultSet.next())
+                System.out.println("a user exists with this username");
             if(!resultSet.next() && username.matches("\\w+")){
                 break;
             }
-            System.out.println("a user exists with this username");
         }
         while (true){
             System.out.println("password :");
@@ -62,32 +62,29 @@ public class UserRepository {
         }
         System.out.println("bio :");
         bio = Menu.scanner.next();
-        System.out.println("business account ? (answer with 0 or 1)");
-        account = Menu.scanner.next();
+        while (true){
+            System.out.println("business account ? (answer with Yes or NO)");
+            account = Menu.scanner.next();
+            if(account.equalsIgnoreCase("yes")) {
+                user.setAccount(0);
+                break;
+            }else if(account.equalsIgnoreCase("no")){
+                user.setAccount(1);
+                break;
+            }
+        }
 
-         if(account.equalsIgnoreCase("yes")){
-             businessAccount.setName(name);
-             businessAccount.setUserName(username);
-             businessAccount.setPassword(password);
-             businessAccount.setAge(age);
-             businessAccount.setEmail(email);
-             businessAccount.setPhoneNumber(phoneNumber);
-             businessAccount.setBio(bio);
-             businessAccount.setSecurityResponse(securityResponse);
-         }else if(account.equalsIgnoreCase("no")){
-             user.setName(name);         user.setUserName(username);
-             user.setPassword(password); user.setAge(age);
-             user.setEmail(email);       user.setPhoneNumber(phoneNumber);
-             user.setBio(bio);           user.setSecurityResponse(securityResponse);
-         }
+        user.setName(name);   user.setUserName(username);   user.setPassword(password);
+        user.setAge(age);     user.setEmail(email);         user.setPhoneNumber(phoneNumber);
+        user.setBio(bio);     user.setSecurityResponse(securityResponse);
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into user " +
                 "VALUES (?,?,?,?,?,?,?,?,?)");
-        preparedStatement.setString(1,name);     preparedStatement.setString(2,username);
-        preparedStatement.setString(3,password); preparedStatement.setString(4,securityResponse);
-        preparedStatement.setString(5,email);    preparedStatement.setString(6,phoneNumber);
-        preparedStatement.setBoolean(7,          Boolean.parseBoolean(account));
-        preparedStatement.setInt(8,age);         preparedStatement.setString(9,bio);
+        preparedStatement.setString(1,user.getName());     preparedStatement.setString(2,user.getUserName());
+        preparedStatement.setString(3,user.getPassword()); preparedStatement.setString(4,user.getSecurityResponse());
+        preparedStatement.setString(5,user.getEmail());    preparedStatement.setString(6,user.getPhoneNumber());
+        preparedStatement.setInt(7,user.getAccount());
+        preparedStatement.setInt(8,user.getAge());        preparedStatement.setString(9,user.getBio());
         preparedStatement.executeUpdate();
 
         System.out.println("sign up was successful");

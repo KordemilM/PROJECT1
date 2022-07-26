@@ -16,12 +16,12 @@ public class DatabaseInitializer {
         statement.executeUpdate(
                 "CREATE TABLE IF NOT EXISTS " +
                         "user (name varchar(255) NOT NULL," +
-                        "user_name varchar(255) NOT NULL unique," +
-                        "pass_word varchar(255) NOT NULL," +
+                        "username varchar(255) NOT NULL unique," +
+                        "password varchar(255) NOT NULL," +
                         "security_response varchar(255) NOT NULL," +
                         "email varchar(255) NOT NULL," +
-                        "phoneNumber varchar(255) NOT NULL," +
-                        "business_account BOOLEAN NOT NULL," +
+                        "phone_Number varchar(255) NOT NULL," +
+                        "business_account int NOT NULL," +
                         "age int NOT NULL," +
                         "bio varchar(255)," +
                         "PRIMARY KEY (user_name))");

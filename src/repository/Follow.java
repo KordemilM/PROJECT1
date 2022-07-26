@@ -74,12 +74,16 @@ public class Follow {
             map.put(resultSet.getString(3),0);
         }
 
+        //SELECT COUNT(*) FROM follow WHERE fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
+        //SELECT COUNT(*) FROM follow WHERE " +
+        //                    "(fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
+
         for (String s : map.keySet()) {
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE " +
-                    "(fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE" +
+                    " fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
             preparedStatement1.setString(1,s);
-            preparedStatement1.setString(2,s);
-            preparedStatement1.setString(3,id);
+            preparedStatement1.setString(2,id);
+            //preparedStatement1.setString(3,id);
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if(resultSet1.next()){
                 map.put(s,resultSet1.getInt(1));

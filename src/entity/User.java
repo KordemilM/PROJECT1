@@ -10,6 +10,7 @@ public class User {
     private String phoneNumber;
     private int age;
     private String bio;
+    private int account;
 
 
 
@@ -75,6 +76,14 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public int getAccount() {
+        return account;
+    }
+
+    public void setAccount(int account) {
+        this.account = account;
     }
 
     @Override
