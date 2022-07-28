@@ -1,6 +1,6 @@
 package utils;
 
-import repository.UserRepository;
+import repository.SignUpIn;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -19,10 +19,10 @@ public class Menu {
             System.out.println("1-Sign Up" + "\n" +"2-Log in" + "\n" + "3-Exit");
             switch (Integer.parseInt(scanner.next())){
                 case 1:
-                    UserRepository.signUp(connection);
+                    SignUpIn.signUp(connection);
                     break;
                 case 2:
-                    if(UserRepository.login(connection)==0)
+                    if(SignUpIn.login(connection)==0)
                         FirstMenu.run(connection);
                     break;
                 default:

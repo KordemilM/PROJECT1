@@ -44,7 +44,7 @@ public class Follow {
     }
 
     public static boolean addFollower(Connection connection, User user) throws SQLException {
-        Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+        Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
         String id = userPreferences.get("id", "");
 
         if(findFollow(connection,id,user.getUserName())) {
@@ -61,7 +61,7 @@ public class Follow {
 
     public static void userSuggestion(Connection connection) throws SQLException {
         HashMap<String,Integer> map = new HashMap<>();
-        Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+        Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
         String id = userPreferences.get("id", "");
 
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follow WHERE fromId IN " +
@@ -75,18 +75,18 @@ public class Follow {
             map.put(resultSet.getString(3),0);
         }
 
-        //SELECT COUNT(*) FROM follow WHERE fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
-        //SELECT COUNT(*) FROM follow WHERE (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
-
         for (String s : map.keySet()) {
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE"+
-                    " (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)");
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) FROM follow WHERE "+
+                    "(fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)) OR " +
+                    "(toId = ? AND fromId IN (SELECT toId FROM follow WHERE fromId = ?))");
             preparedStatement1.setString(1,s);
-            preparedStatement1.setString(2,s);
-            preparedStatement1.setString(3,id);
+            preparedStatement1.setString(2,id);
+            preparedStatement1.setString(3,s);
+            preparedStatement1.setString(4,id);
 
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if(resultSet1.next()){
+                //System.out.println(s + ":" + resultSet1.getInt(1));
                 map.put(s,resultSet1.getInt(1));
             }
         }
@@ -129,4 +129,7 @@ public class Follow {
         return true;
     }
 
+
+    //SELECT COUNT(*) FROM follow WHERE fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
+    //SELECT COUNT(*) FROM follow WHERE (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
 }
