@@ -5,7 +5,7 @@ import utils.Menu;
 import java.sql.*;
 import java.util.prefs.Preferences;
 
-public class UserRepository {
+class UserRepository {
 
     public static void signUp(Connection connection) throws SQLException {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
