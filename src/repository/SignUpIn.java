@@ -16,7 +16,7 @@ public class SignUpIn {
         String name = Menu.scanner.next();
         while (true){
             System.out.println("username :");
-            username = Menu.scanner.nextLine();
+            username = Menu.scanner.next();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name = '" + username + "'");
             if(resultSet.next())

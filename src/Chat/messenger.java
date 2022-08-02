@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class messenger {
     public static void run() throws SQLException {
 
-        Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?autoReconnect=true&useSSL=false", "root", "maziar.gohar123");
+        Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
         Statement s = Conn.createStatement();
         s.executeUpdate("CREATE DATABASE IF NOT EXISTS `chats` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
         Database.insert("chats", "CREATE TABLE IF NOT EXISTS `chat_info` ("+
@@ -243,7 +243,7 @@ class Database{
     public static ResultSet select(String schema , String command){
         try {
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + schema+"?autoReconnect=true&useSSL=false", "root", "maziar.gohar123");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
 
             Statement myStatement = myConnection.createStatement();
 
@@ -258,7 +258,7 @@ class Database{
         try {
 
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + schema+"?autoReconnect=true&useSSL=false", "root", "maziar.gohar123");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
 
             Statement myStatement = myConnection.createStatement();
 

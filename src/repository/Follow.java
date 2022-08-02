@@ -93,7 +93,6 @@ public class Follow {
 
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if(resultSet1.next()){
-                //System.out.println(s + ":" + resultSet1.getInt(1));
                 map.put(s,resultSet1.getInt(1));
             }
         }
@@ -136,7 +135,4 @@ public class Follow {
         return true;
     }
 
-
-    //SELECT COUNT(*) FROM follow WHERE fromId = ? AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
-    //SELECT COUNT(*) FROM follow WHERE (fromId = ? OR toId = ?) AND toId IN (SELECT toId FROM follow WHERE fromId = ?)
 }
