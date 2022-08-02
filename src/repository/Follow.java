@@ -19,6 +19,13 @@ public class Follow {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE user_name=?");
         preparedStatement.setString(1, follower);
         ResultSet resultSet = preparedStatement.executeQuery();
+        Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
+        String id = userPreferences.get("id", "");
+
+        if(follower.equals(id)){
+            System.out.println("you can't follow yourself!");
+            return;
+        }
         if(resultSet.next()){
             User user = new User();
             user.setName(resultSet.getString(1));  user.setUserName(resultSet.getString(2));
