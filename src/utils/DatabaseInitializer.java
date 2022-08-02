@@ -13,9 +13,9 @@ public class DatabaseInitializer {
 
     private void userTable(Statement statement) throws SQLException {
         statement.executeUpdate(
-                "CREATE TABLE IF NOT EXISTS " +
+                    "CREATE TABLE IF NOT EXISTS " +
                         "user (name varchar(255) NOT NULL," +
-                        "username varchar(255) NOT NULL unique," +
+                        "user_name varchar(255) NOT NULL unique," +
                         "password varchar(255) NOT NULL," +
                         "security_response varchar(255) NOT NULL," +
                         "email varchar(255) NOT NULL," +

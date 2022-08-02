@@ -5,7 +5,8 @@ import utils.Menu;
 import java.sql.*;
 import java.util.prefs.Preferences;
 
-public class UserRepository {
+public class SignUpIn {
+    public static String onlineUser_username ;
 
     public static void signUp(Connection connection) throws SQLException {
         String username , email , password, securityResponse , phoneNumber , bio ,repeatPassword , account;
@@ -15,21 +16,25 @@ public class UserRepository {
         String name = Menu.scanner.next();
         while (true){
             System.out.println("username :");
-            username = Menu.scanner.next();
+            username = Menu.scanner.nextLine();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name='" + username + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name = '" + username + "'");
             if(resultSet.next())
                 System.out.println("a user exists with this username");
-            if(!resultSet.next() && username.matches("\\w+")){
+            else if(!username.matches("\\w+"))
+                System.out.println("username must contains letters only");
+            else
                 break;
-            }
         }
         while (true){
             System.out.println("password :");
             password = Menu.scanner.next();
-            if(password.length()>=8 && password.matches("\\w+")){
+            if(password.length() < 8)
+                System.out.println("password must have at least 8 characters");
+            else if (!password.matches("\\w+"))
+                System.out.println("invalid character");
+            else
                 break;
-            }
         }
         while (true){
             System.out.println("repeat password:");
@@ -50,14 +55,16 @@ public class UserRepository {
         while (true){
             System.out.println("Phone number :");
             phoneNumber = Menu.scanner.next();
-            if(phoneNumber.matches("(0/91)?[7-9][0-9]{9}")){
+            if(!phoneNumber.matches("\\d{11}")){
+                System.out.println("invalid phone number");
+            }else {
                 break;
             }
         }
         while (true){
             System.out.println("age :");
             age = Menu.scanner.nextInt();
-            if(Integer.toString(age).matches("[0-9]+")) {
+            if(Integer.toString(age).matches("\\d+")) {
                 break;
             }
         }
@@ -102,7 +109,7 @@ public class UserRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()) {
-            Preferences userPreferences = Preferences.userNodeForPackage(UserRepository.class);
+            Preferences userPreferences = Preferences.userNodeForPackage(SignUpIn.class);
             userPreferences.put("id", username);
 
             System.out.println("Forgot password?");
@@ -140,7 +147,8 @@ public class UserRepository {
                 System.out.println("password :");
                 password = Menu.scanner.next();
                 if (password.equals(resultSet.getString(3))) {
-                    System.out.println("<------------------------->");
+                    onlineUser_username = username;
+                    System.out.println("<----------- wellcome back "+onlineUser_username+" ----------->");
                     return 0;
                 }else {
                     System.out.println("Your password is not correct");
