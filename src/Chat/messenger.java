@@ -107,8 +107,8 @@ class chat{
                     }
                     Database.insert("chats",
                             "INSERT INTO "+destination_chat_table_name+
-                                    " (sender_username,content,user_name_forwarded_from) " +
-                                    "VALUES ("+ username  + ", '" +content+"',"+sender_username+ ")");
+                                    " (sender_username,content,user_username_forwarded_from) " +
+                                    "VALUES ('"+ username  + "', '" +content+"', '"+sender_username+ "' )");
 
                     System.out.println("forwarded");
                 }
