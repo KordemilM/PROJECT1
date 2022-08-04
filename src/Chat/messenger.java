@@ -11,7 +11,7 @@ public class messenger {
     public static Connection Conn;
     public static void run() throws SQLException {
 
-        Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","maziar.gohar123");
+        Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project?autoReconnect=true&useSSL=false","root","maziar.gohar123");
         Statement s = Conn.createStatement();
         s.executeUpdate("CREATE DATABASE IF NOT EXISTS `chats` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
         Database.insert("chats", "CREATE TABLE IF NOT EXISTS `chat_info` ("+
@@ -253,19 +253,21 @@ class chat{
     private static void privateChat(String username) throws SQLException {
         PreparedStatement state = Conn.prepareStatement("SELECT `chat_id`,`members`" +
                 "FROM `chats`.`chat_info`" +
-                "WHERE chat_name = '[Private]' AND" +
+                "WHERE chat_name = '[PRIVATE]' AND" +
                 "( members Like ? OR members Like ?)");
         state.setString(1, username + "%");
         state.setString(2, "%" +username);
         ResultSet rs = state.executeQuery();
         Map<String, Integer> existedChats = new HashMap<>();
-        if (!rs.next())
-            System.out.println("you don't have any private chats recently");
-        else while (rs.next()){
+        boolean hasPrevious = false;
+        while (rs.next()){
             String person = rs.getString("members").replace(username,"").replace(",","");
             System.out.println(person);
             existedChats.put(person,rs.getInt("chat_id"));
+            hasPrevious = true;
         }
+        if (!hasPrevious)
+            System.out.println("you don't have any private chats recently );");
         String input;
         while(true){
             input = new Scanner(System.in).next();
@@ -285,19 +287,31 @@ class chat{
         if(existedChats.containsKey(input)){
             chatroom(username,existedChats.get(input));
         }else{
-            PreparedStatement st = Conn.prepareStatement("""
-                    CREATE TABLE ? (
-                      `message_id` int NOT NULL AUTO_INCREMENT,
-                      `content` varchar(200) DEFAULT NULL,
-                      `sender_username` varchar(45) NOT NULL,
-                      `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                      `message_id_reply_to` int DEFAULT NULL,
-                      `user_username_forwarded_from` varchar(45) DEFAULT NULL,
-                      PRIMARY KEY (`message_id`)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-                    """);
-            st.setString(1, "chat_"+);
-
+            int lastID = 1;
+            ResultSet lastIdSet = Conn.createStatement().executeQuery("SELECT chat_id FROM `chats`.`chat_info` ORDER BY chat_id DESC LIMIT 1");
+            if (lastIdSet.next()) {
+                lastID+= lastIdSet.getInt("chat_id");
+            }
+            String chatName = "chat_"+lastID;
+            PreparedStatement st = Conn.prepareStatement("CREATE TABLE `chats`.`"+chatName+"` ("
+                      +"`message_id` int NOT NULL AUTO_INCREMENT, "
+                      +"`content` varchar(200) DEFAULT NULL, "
+                      +"`sender_username` varchar(45) NOT NULL, "
+                      +"`datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
+                      +"`message_id_reply_to` int DEFAULT NULL, "
+                      +"`user_username_forwarded_from` varchar(45) DEFAULT NULL, "
+                      +"PRIMARY KEY (`message_id`) "
+                      +") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;");
+            st.executeUpdate();
+            PreparedStatement result = Conn.prepareStatement("INSERT INTO `chats`.`chat_info`\n" +
+                    "(`chat_name`,\n" +
+                    "`members`)\n" +
+                    "VALUES\n" +
+                    "('[PRIVATE]',\n" +
+                    "?);\n");
+            result.setString(1,username+","+input);
+            result.executeUpdate();
+            chatroom(username, lastID);
         }
     }
 }
@@ -306,7 +320,7 @@ class Database{
     public static ResultSet select(String schema , String command){
         try {
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema,"root","maziar.gohar123");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema+"?autoReconnect=true&useSSL=false","root","maziar.gohar123");
 
             Statement myStatement = myConnection.createStatement();
 
@@ -321,7 +335,7 @@ class Database{
         try {
 
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema,"root","maziar.gohar123");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema+"?autoReconnect=true&useSSL=false","root","maziar.gohar123");
 
             Statement myStatement = myConnection.createStatement();
 

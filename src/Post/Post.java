@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Post {
     public static void run(String username) throws SQLException {
         Connection connection = DriverManager.getConnection
-                ("jdbc:mysql://localhost:3306/project","root","maziar.gohar123");
+                ("jdbc:mysql://localhost:3306/project?autoReconnect=true&useSSL=false","root","maziar.gohar123");
         AppContext.getDatabaseInitializer().initPostComTable(connection.createStatement());
         User user = AppContext.getUserRepos().getUserByUsername(username, connection);
         UserMain.setUser(user);
