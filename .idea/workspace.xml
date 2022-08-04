@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="you can't follow yourself!">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Chat/messenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chat/messenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ConnectToTheDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ConnectToTheDatabase.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2CiKQRiZfPMP99tC9CFAaCp8qFd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Maziar/Downloads/Telegram Desktop/Project1 (2)/Project1/lib/mysql-connector-java-8.0.12.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.5105796",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainApp" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="" />
+      <created>1659279958569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659279958569</updated>
+      <workItem from="1659279962209" duration="1406000" />
+      <workItem from="1659353627940" duration="515000" />
+      <workItem from="1659354161884" duration="1857000" />
+      <workItem from="1659424419114" duration="6587000" />
+      <workItem from="1659433173157" duration="3117000" />
+      <workItem from="1659436590370" duration="1783000" />
+      <workItem from="1659442844123" duration="105000" />
+      <workItem from="1659589842457" duration="11055000" />
+    </task>
+    <task id="LOCAL‎۰۰۰۰۱" summary="final">
+      <created>1659429192795</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۱" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۱" />
+      <updated>1659429192795</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۲" summary="final">
+      <created>1659432466058</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۲" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۲" />
+      <updated>1659432466058</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۳" summary="final">
+      <created>1659434692967</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۳" />
+      <updated>1659434692967</updated>
+    </task>
+    <task id="LOCAL‎۰۰۰۰۴" summary="you can't follow yourself!">
+      <created>1659436212657</created>
+      <option name="number" value="LOCAL‎۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎۰۰۰۰۴" />
+      <updated>1659436212657</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="final" />
+    <MESSAGE value="you can't follow yourself!" />
+    <option name="LAST_COMMIT_MESSAGE" value="you can't follow yourself!" />
+  </component>
+</project>

@@ -3,14 +3,15 @@ package Chat;
 import repository.SignUpIn;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+import static Chat.messenger.Conn;
 
 public class messenger {
+    public static Connection Conn;
     public static void run() throws SQLException {
 
-        Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
+        Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","maziar.gohar123");
         Statement s = Conn.createStatement();
         s.executeUpdate("CREATE DATABASE IF NOT EXISTS `chats` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;\n");
         Database.insert("chats", "CREATE TABLE IF NOT EXISTS `chat_info` ("+
@@ -156,7 +157,9 @@ class chat{
 
         System.out.println("2. show recent chats");
 
-        System.out.println("3. Exit");
+        System.out.println("3. personal");
+
+        System.out.println("4. Exit");
 
         String choice = new Scanner(System.in).nextLine();
 
@@ -230,11 +233,71 @@ class chat{
                 }
                 return true;
             }
-            case "3" -> {return false;}
+
+            case "3" -> {
+                System.out.println("Choose one of your previous chats or enter new username to start chat : ( 'cancel' for going back )");
+                privateChat(username);
+                return true;
+            }
+
+            case "4" -> {return false;}
+
             default -> {
                 System.out.println("Invalid choice");
                 return true;
             }
+
+        }
+    }
+
+    private static void privateChat(String username) throws SQLException {
+        PreparedStatement state = Conn.prepareStatement("SELECT `chat_id`,`members`" +
+                "FROM `chats`.`chat_info`" +
+                "WHERE chat_name = '[Private]' AND" +
+                "( members Like ? OR members Like ?)");
+        state.setString(1, username + "%");
+        state.setString(2, "%" +username);
+        ResultSet rs = state.executeQuery();
+        Map<String, Integer> existedChats = new HashMap<>();
+        if (!rs.next())
+            System.out.println("you don't have any private chats recently");
+        else while (rs.next()){
+            String person = rs.getString("members").replace(username,"").replace(",","");
+            System.out.println(person);
+            existedChats.put(person,rs.getInt("chat_id"));
+        }
+        String input;
+        while(true){
+            input = new Scanner(System.in).next();
+            ResultSet resultSet = Conn.createStatement().executeQuery("SELECT * FROM `project`.`user` " +
+                    "WHERE user_name = '"
+                    +input+"'");
+            if(input.equals("cancel")){
+                return;
+            }
+            if(!resultSet.next()){
+                System.out.println("username not found! Please try again");
+            }
+            else if(input.equals(username)){
+                System.out.println("Please chat with yourself some where else XD.try again");
+            }else break;
+        }
+        if(existedChats.containsKey(input)){
+            chatroom(username,existedChats.get(input));
+        }else{
+            PreparedStatement st = Conn.prepareStatement("""
+                    CREATE TABLE ? (
+                      `message_id` int NOT NULL AUTO_INCREMENT,
+                      `content` varchar(200) DEFAULT NULL,
+                      `sender_username` varchar(45) NOT NULL,
+                      `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                      `message_id_reply_to` int DEFAULT NULL,
+                      `user_username_forwarded_from` varchar(45) DEFAULT NULL,
+                      PRIMARY KEY (`message_id`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                    """);
+            st.setString(1, "chat_"+);
+
         }
     }
 }
@@ -243,7 +306,7 @@ class Database{
     public static ResultSet select(String schema , String command){
         try {
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema,"root","maziar.gohar123");
 
             Statement myStatement = myConnection.createStatement();
 
@@ -258,7 +321,7 @@ class Database{
         try {
 
 
-            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","M78fF52Kwa1");
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+schema,"root","maziar.gohar123");
 
             Statement myStatement = myConnection.createStatement();
 
