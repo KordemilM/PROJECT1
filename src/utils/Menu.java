@@ -16,17 +16,22 @@ public class Menu {
         System.out.println("Hi " + "\n" +"WELCOME");
 
         while (true){
-            System.out.println("1-Sign Up" + "\n" +"2-Log in" + "\n" + "3-Exit");
-            switch (Integer.parseInt(scanner.next())){
-                case 1:
+            System.out.println("""
+                    1-Sign Up
+                    2-Log in
+                    3-Exit""");
+            switch (scanner.next()){
+                case "1":
                     SignUpIn.signUp(connection);
                     break;
-                case 2:
+                case "2":
                     if(SignUpIn.login(connection)==0)
                         FirstMenu.run(connection);
                     break;
-                default:
+                case "3":
                     System.exit(0);
+                default:
+                    System.out.println("invalid command");
             }
         }
     }
