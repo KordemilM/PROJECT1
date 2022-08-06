@@ -208,4 +208,12 @@ public class PostComRepos {
         statement.close();
         return views;
     }
+
+    public ArrayList<PostCom> getLast10Post(String username, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from PostCom where username = '"+username+"' or username in (select toId from follow where fromId = '"+username+"') order by datetime desc limit 10"
+        );
+        return getPostCom(statement, resultSet);
+    }
 }
