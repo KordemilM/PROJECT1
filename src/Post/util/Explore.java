@@ -16,32 +16,56 @@ public class Explore {
     }
 
     public void main(Scanner scanner, Connection connection) throws SQLException {
-        ShowAd.showAd(scanner, connection, user);
+        ArrayList<PostCom> posts;
+        try {
+            ShowAd.showAd(scanner, connection, user);
+        } catch (Exception e) {
+            System.out.println("No ads");
+        }
         System.out.println("----------------------------------------------------");
-        ArrayList<PostCom> posts =  AppContext.getPostComRepos().getAllPostOtherThanUser(user.getUserName(), connection);
-        while(true){
+        try {
+            posts = AppContext.getPostComRepos().getAllPosts(user.getUserName(), connection);
+        } catch (Exception e) {
+            System.out.println("No posts");
+            return;
+        }
+        PostCom post;
+        while (true) {
             Menu.showPostsMenu(posts);
             String input = scanner.next();
-            if(input.equals("Back"))
+            int postNum;
+            if (input.equals("0")) {
                 break;
-            int postNum = Integer.parseInt(input)-1;
-            PostCom post = posts.get(postNum);
-            AppContext.getPostComRepos().addView(post,user, connection);
+            }
+            try {
+                postNum = Integer.parseInt(input) - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid input");
+                continue;
+            }
+            post = posts.get(postNum);
+            AppContext.getPostComRepos().addView(post, user, connection);
             ReactPost reactPost = new ReactPost();
             reactPost.setPost(post);
             reactPost.setUser(user);
             reactPost.main(scanner, connection);
+            }
         }
-    }
 
-    public void mainCom(PostCom post, Scanner scanner, Connection connection) throws SQLException {
-        ArrayList<PostCom> posts =  AppContext.getPostComRepos().getChildren(post.getId(), connection);
-        while(true){
+    public void mainCom (PostCom post, Scanner scanner, Connection connection) throws SQLException {
+        ArrayList<PostCom> posts = AppContext.getPostComRepos().getChildren(post.getId(), connection);
+        while (true) {
             Menu.showPostsMenu(posts);
             String input = scanner.next();
-            if(input.equals("Back"))
+            int postNum;
+            if (input.equals("0"))
                 break;
-            int postNum = Integer.parseInt(input)-1;
+            try {
+                postNum = Integer.parseInt(input) - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid input");
+                continue;
+            }
             PostCom temp = posts.get(postNum);
             ReactPost reactPost = new ReactPost();
             reactPost.setPost(temp);

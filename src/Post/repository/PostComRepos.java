@@ -256,4 +256,12 @@ public class PostComRepos {
         statement.close();
         return postComArrayList.get(0);
     }
+
+    public ArrayList<PostCom> getAllPosts(String username, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from PostCom where isAds = false and id not in (select post_id from views where username = '"+username+"') and username != '" + username + "' order by datetime desc"
+        );
+        return getPostCom(statement, resultSet);
+    }
 }

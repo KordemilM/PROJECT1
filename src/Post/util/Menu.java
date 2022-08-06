@@ -23,10 +23,10 @@ public class Menu {
         }
 
         public static void showPostsMenu(ArrayList<PostCom> posts) {
+            System.out.println("0-Back");
             for (int i = 1; i <= posts.size(); i++) {
                 System.out.println(i + "-" + posts.get(i-1));
             }
-            System.out.println("Back");
         }
 
         public static void showPostMenu() {

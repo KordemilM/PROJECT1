@@ -10,6 +10,11 @@ import java.util.Scanner;
 public class ShowAd {
     public static void showAd(Scanner scanner, Connection connection, User user) throws SQLException {
         PostCom post = AppContext.getPostComRepos().getRandomAdsPost(user.getUserName(),connection);
+        if(post == null) {
+            System.out.println("No ads");
+            return;
+        }
+        AppContext.getPostComRepos().addView(post,user, connection);
         System.out.println("Ads: " + post);
         while (true) {
             System.out.println("1. React");
