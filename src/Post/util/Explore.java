@@ -16,6 +16,8 @@ public class Explore {
     }
 
     public void main(Scanner scanner, Connection connection) throws SQLException {
+        ShowAd.showAd(scanner, connection, user);
+        System.out.println("----------------------------------------------------");
         ArrayList<PostCom> posts =  AppContext.getPostComRepos().getAllPostOtherThanUser(user.getUserName(), connection);
         while(true){
             Menu.showPostsMenu(posts);

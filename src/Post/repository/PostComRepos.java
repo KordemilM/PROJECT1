@@ -243,4 +243,14 @@ public class PostComRepos {
         statement.close();
         return isViewed;
     }
+
+    public PostCom getRandomAdsPost(String username, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from PostCom where isAds = true and id not in (select post_id from views where username = '"+username+"') order by rand() limit 1"
+        );
+        ArrayList<PostCom> postComArrayList = getPostCom(statement, resultSet);
+        statement.close();
+        return postComArrayList.get(0);
+    }
 }

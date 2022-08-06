@@ -5,18 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="post">
-      <change beforePath="$PROJECT_DIR$/src/Post/entity/User.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Post/util/ShowAd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Post/repository/UserRepos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/repository/UserRepos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Post/util/AppContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/AppContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Post/util/Explore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/Explore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Post/util/FollowerPosts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/FollowerPosts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Post/util/ReactPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/ReactPost.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -110,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659794931507</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="post">
+      <created>1659796015197</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659796015197</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
