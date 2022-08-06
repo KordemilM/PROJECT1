@@ -21,10 +21,17 @@ public class FollowerPosts {
             ArrayList<PostCom> posts = AppContext.getPostComRepos().getLast10Post(user.getUserName(), connection);
             Menu.showPostsMenu(posts);
             String choice = scanner.next();
-            if(choice.equals("Back")) {
+            int postId;
+            if(choice.equals("0")) {
                 return;
             }
-            int postId = Integer.parseInt(choice)-1;
+            try {
+                postId = Integer.parseInt(choice)-1;
+            }
+            catch (Exception e) {
+                System.out.println("Invalid input");
+                continue;
+            }
             PostCom post = posts.get(postId);
             ReactPost reactPost = new ReactPost();
             reactPost.setUser(user);

@@ -22,9 +22,16 @@ public class MyPosts {
         while (true) {
             Menu.showPostsMenu(posts);
             String input = scanner.next();
-            if (input.equals("Back"))
+            int postNum;
+            if (input.equals("0"))
                 break;
-            int postNum = Integer.parseInt(input)-1;
+            try {
+                postNum = Integer.parseInt(input)-1;
+            }
+            catch (Exception e) {
+                System.out.println("Invalid input");
+                continue;
+            }
             PostCom post = posts.get(postNum);
             System.out.println(
                     "Subject: " + post.getSubject() + "\n" +
