@@ -1,7 +1,7 @@
 package Post.util;
 
 import Post.entity.PostCom;
-import Post.entity.User;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,6 +16,10 @@ public class AddPost {
     }
 
     public static void addPost(Scanner scanner, Connection connection) throws SQLException {
+        if(user.getAccount() == 0){
+            AppContext.getDatabaseInitializer().initViewsTable(connection.createStatement());
+            AppContext.getDatabaseInitializer().initLikesTable(connection.createStatement());
+        }
         while(true) {
             Menu.addPostMenu();
             PostCom postCom = new PostCom();
@@ -27,7 +31,7 @@ public class AddPost {
             if (input.equals("Back"))
                 return;
             postCom.setContent(input);
-            postCom.setUserName(user.getName());
+            postCom.setUserName(user.getUserName());
             postCom.setDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
             postCom.setLikes(0);
             postCom.setParent(0);
@@ -44,7 +48,7 @@ public class AddPost {
             if (input.equals("Back"))
                 return;
             postCom.setContent(input);
-            postCom.setUserName(user.getName());
+            postCom.setUserName(user.getUserName());
             postCom.setDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
             postCom.setLikes(0);
             postCom.setParent(post.getId());

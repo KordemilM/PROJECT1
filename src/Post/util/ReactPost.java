@@ -1,7 +1,7 @@
 package Post.util;
 
 import Post.entity.PostCom;
-import Post.entity.User;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package Post.util;
 
 import Post.entity.PostCom;
-import Post.entity.User;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,7 +18,7 @@ public class MyPosts {
     }
 
     public static void main(Scanner scanner, Connection connection) throws SQLException {
-        ArrayList<PostCom> posts = AppContext.getPostComRepos().getAllPostsByUser(user.getName(), connection);
+        ArrayList<PostCom> posts = AppContext.getPostComRepos().getAllPostsByUser(user.getUserName(), connection);
         while (true) {
             Menu.showPostsMenu(posts);
             String input = scanner.next();
@@ -28,15 +28,15 @@ public class MyPosts {
             PostCom post = posts.get(postNum);
             System.out.println(
                     "Subject: " + post.getSubject() + "\n" +
-                    "Content: " + post.getContent() + "\n" +
-                    "Likes: " + post.getLikes() + "\n" +
-                    "Views: " + post.getViews() + "\n" +
-                    "Date: " + post.getDate() + "\n" +
-                    "Parent: " + post.getParent() + "\n" +
-                    "User: " + post.getUserName() + "\n" +
-                    "Id: " + post.getId() + "\n"
+                            "Content: " + post.getContent() + "\n" +
+                            "Likes: " + post.getLikes() + "\n" +
+                            "Views: " + post.getViews() + "\n" +
+                            "Date: " + post.getDate() + "\n" +
+                            "Parent: " + post.getParent() + "\n" +
+                            "User: " + post.getUserName() + "\n" +
+                            "Id: " + post.getId() + "\n"
             );
-            if(user.isBusiness()){
+            if(user.getAccount() == 0){
                 System.out.println("Show Stats: ");
                 LinkedHashMap<Date,Integer> likeStats = AppContext.getPostComRepos().getLikes(post, connection);
                 LinkedHashMap<Date,Integer> viewStats = AppContext.getPostComRepos().getViews(post, connection);

@@ -119,7 +119,7 @@ public class PostComRepos {
         );
         preparedStatement.executeUpdate();
         preparedStatement.close();
-        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).isBusiness()) {
+        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).getAccount() == 0) {
             PreparedStatement preparedStatement1 = connection.prepareStatement(
                     "insert into likes(post_id, assigndate) values(?,?)"
             );
@@ -137,7 +137,7 @@ public class PostComRepos {
         );
         preparedStatement.executeUpdate();
         preparedStatement.close();
-        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).isBusiness()) {
+        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).getAccount() == 0) {
             PreparedStatement preparedStatement1 = connection.prepareStatement(
                     "insert into views(post_id, assigndate) values(?,?)"
             );
@@ -167,9 +167,6 @@ public class PostComRepos {
     public LinkedHashMap<Date, Integer> getLikes(PostCom post, Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(
-//                "select * from likes where " +
-//                        "post_id = " + post.getId() +
-//                        "ORDER BY assigndate"
                 "select * from likes where post_id = " + post.getId() +
                         " ORDER by assigndate"
         );

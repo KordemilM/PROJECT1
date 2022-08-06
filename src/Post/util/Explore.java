@@ -1,7 +1,7 @@
 package Post.util;
 
 import Post.entity.PostCom;
-import Post.entity.User;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class Explore {
     }
 
     public void main(Scanner scanner, Connection connection) throws SQLException {
-        ArrayList<PostCom> posts =  AppContext.getPostComRepos().getAllPostOtherThanUser(user.getName(), connection);
+        ArrayList<PostCom> posts =  AppContext.getPostComRepos().getAllPostOtherThanUser(user.getUserName(), connection);
         while(true){
             Menu.showPostsMenu(posts);
             String input = scanner.next();

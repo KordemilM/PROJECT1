@@ -1,6 +1,6 @@
 package Post.util;
 
-import Post.entity.User;
+import entity.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,6 +35,12 @@ public class UserMain {
                 }
 
                 case 4 -> {
+                    FollowerPosts.setUser(user);
+                    FollowerPosts.main(scanner, connection);
+                    break;
+                }
+
+                case 5 -> {
                     repeat = false;
                 }
             }
