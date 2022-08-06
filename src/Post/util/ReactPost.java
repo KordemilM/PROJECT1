@@ -37,8 +37,13 @@ public class ReactPost {
             );
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    AppContext.getPostComRepos().likePost(post, connection);
-                    System.out.println("Liked");
+                    if(!AppContext.getPostComRepos().isLiked(post,user,connection)) {
+                        AppContext.getPostComRepos().likePost(post,user, connection);
+                        post.setLikes(post.getLikes() + 1);
+                        System.out.println("Liked");
+                    } else {
+                        System.out.println("You already liked this post");
+                    }
                 }
                 case 2 -> {
                     Explore explore = new Explore();

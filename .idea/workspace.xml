@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="Post">
-      <change beforePath="$PROJECT_DIR$/src/Post/util/DatabaseInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/DatabaseInitializer.java" afterDir="false" />
+    <list default="true" id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="post">
+      <change beforePath="$PROJECT_DIR$/src/Post/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/repository/UserRepos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/repository/UserRepos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/util/AppContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/AppContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/util/Explore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/Explore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/util/FollowerPosts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/FollowerPosts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/util/ReactPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/ReactPost.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +96,21 @@
       <option name="presentableId" value="LOCAL‎۰۰۰۰۵" />
       <updated>1659602865175</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="post">
+      <created>1659794668575</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659794668575</updated>
+    </task>
+    <task id="LOCAL-00007" summary="post">
+      <created>1659794931507</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659794931507</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +131,7 @@
     <MESSAGE value="final" />
     <MESSAGE value="you can't follow yourself!" />
     <MESSAGE value="creating private chat (not completed)" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating private chat (not completed)" />
+    <MESSAGE value="post" />
+    <option name="LAST_COMMIT_MESSAGE" value="post" />
   </component>
 </project>

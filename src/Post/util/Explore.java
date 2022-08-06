@@ -24,7 +24,7 @@ public class Explore {
                 break;
             int postNum = Integer.parseInt(input)-1;
             PostCom post = posts.get(postNum);
-            AppContext.getPostComRepos().addView(post, connection);
+            AppContext.getPostComRepos().addView(post,user, connection);
             ReactPost reactPost = new ReactPost();
             reactPost.setPost(post);
             reactPost.setUser(user);

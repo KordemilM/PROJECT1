@@ -17,8 +17,7 @@ public class FollowerPosts {
     }
 
     public static void main(Scanner scanner, Connection connection) throws SQLException {
-        boolean repeat = true;
-        while (repeat) {
+        while (true) {
             ArrayList<PostCom> posts = AppContext.getPostComRepos().getLast10Post(user.getUserName(), connection);
             Menu.showPostsMenu(posts);
             String choice = scanner.next();

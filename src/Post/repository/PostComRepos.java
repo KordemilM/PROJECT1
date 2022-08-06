@@ -2,6 +2,7 @@ package Post.repository;
 
 import Post.entity.PostCom;
 import Post.util.AppContext;
+import entity.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -113,36 +114,36 @@ public class PostComRepos {
 
     // like a post
 
-    public void likePost(PostCom post, Connection connection) throws SQLException {
+    public void likePost(PostCom post,User user, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "update PostCom set likes = likes + 1 where id = "+ post.getId()
         );
         preparedStatement.executeUpdate();
         preparedStatement.close();
-        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).getAccount() == 0) {
-            PreparedStatement preparedStatement1 = connection.prepareStatement(
-                    "insert into likes(post_id, assigndate) values(?,?)"
-            );
-            preparedStatement1.setInt(1, post.getId());
-            preparedStatement1.setDate(2, Date.valueOf(LocalDate.now()));
-            preparedStatement1.executeUpdate();
-        }
+        PreparedStatement preparedStatement1 = connection.prepareStatement(
+                "insert into likes(post_id, assigndate,username) values(?,?,?)"
+        );
+        preparedStatement1.setInt(1, post.getId());
+        preparedStatement1.setDate(2, Date.valueOf(LocalDate.now()));
+        preparedStatement1.setString(3, user.getUserName());
+        preparedStatement1.executeUpdate();
     }
 
     // add view to a post
 
-    public void addView(PostCom post, Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "update PostCom set views = views + 1 where id = "+ post.getId()
-        );
-        preparedStatement.executeUpdate();
-        preparedStatement.close();
-        if(AppContext.getUserRepos().getUserByUsername(post.getUserName(),connection).getAccount() == 0) {
+    public void addView(PostCom post, User user, Connection connection) throws SQLException {
+        if(!isViewed(post,user,connection)){
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "update PostCom set views = views + 1 where id = "+ post.getId()
+            );
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             PreparedStatement preparedStatement1 = connection.prepareStatement(
-                    "insert into views(post_id, assigndate) values(?,?)"
+                    "insert into views(post_id, assigndate,username) values(?,?,?)"
             );
             preparedStatement1.setInt(1, post.getId());
             preparedStatement1.setDate(2, Date.valueOf(LocalDate.now()));
+            preparedStatement1.setString(3, user.getUserName());
             preparedStatement1.executeUpdate();
         }
     }
@@ -215,5 +216,31 @@ public class PostComRepos {
                 "select * from PostCom where username = '"+username+"' or username in (select toId from follow where fromId = '"+username+"') order by datetime desc limit 10"
         );
         return getPostCom(statement, resultSet);
+    }
+
+    public boolean isLiked(PostCom post, User user, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from likes where post_id = " + post.getId() + " and username = '" + user.getUserName() + "'"
+        );
+        boolean isLiked = false;
+        while (resultSet.next()) {
+            isLiked = true;
+        }
+        statement.close();
+        return isLiked;
+    }
+
+    public boolean isViewed(PostCom post, User user, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "select * from views where post_id = " + post.getId() + " and username = '" + user.getUserName() + "'"
+        );
+        boolean isViewed = false;
+        while (resultSet.next()) {
+            isViewed = true;
+        }
+        statement.close();
+        return isViewed;
     }
 }

@@ -1,6 +1,5 @@
 package Post.util;
 
-import Post.entity.User;
 import Post.repository.PostComRepos;
 import Post.repository.UserRepos;
 
