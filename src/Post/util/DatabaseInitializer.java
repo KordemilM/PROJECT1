@@ -17,6 +17,8 @@ public class DatabaseInitializer {
                         "views int, " +
                         "parent int, " +
                         "DateTime datetime, " +
+                        "image varchar(255), " +
+                        "isAds TINYINT, " +
                         "PRIMARY KEY (id))");
         statement.close();
     }
@@ -27,6 +29,7 @@ public class DatabaseInitializer {
                         "likes(id int NOT NULL AUTO_INCREMENT, " +
                         "post_id int, " +
                         "assigndate Date, " +
+                        "username varchar(255), " +
                         "PRIMARY KEY (id))");
         statement.close();
     }
@@ -37,6 +40,7 @@ public class DatabaseInitializer {
                         "views(id int NOT NULL AUTO_INCREMENT, " +
                         "post_id int, " +
                         "assigndate Date, " +
+                        "username varchar(255), " +
                         "PRIMARY KEY (id))");
         statement.close();
     }
