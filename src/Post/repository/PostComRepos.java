@@ -16,7 +16,7 @@ public class PostComRepos {
 
     public void addPost(PostCom post, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into PostCom(subject, content, username, likes, views, parent,datetime) values(?,?,?,?,?,?,?)"
+                "insert into PostCom(subject, content, username, likes, views, parent,datetime,isAds) values(?,?,?,?,?,?,?,?)"
         );
         preparedStatement.setString(1, post.getSubject());
         preparedStatement.setString(2, post.getContent());
@@ -25,6 +25,7 @@ public class PostComRepos {
         preparedStatement.setInt(5, 0);
         preparedStatement.setInt(6, 0);
         preparedStatement.setTimestamp(7, post.getDate());
+        preparedStatement.setInt(8, post.isAds()?1:0);
         preparedStatement.executeUpdate();
     }
 
@@ -48,6 +49,7 @@ public class PostComRepos {
             postCom.setViews(resultSet.getInt("views"));
             postCom.setParent(0);
             postCom.setDate(resultSet.getTimestamp("datetime"));
+            postCom.setAds(resultSet.getInt("isAds") == 1);
             postComArrayList.add(postCom);
         }
         statement.close();
@@ -100,7 +102,7 @@ public class PostComRepos {
 
     public void addChildren(PostCom post, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into PostCom(subject, content, username, likes, views, parent,datetime) values(?,?,?,?,?,?,?)"
+                "insert into PostCom(subject, content, username, likes, views, parent,datetime,isAds) values(?,?,?,?,?,?,?,?)"
         );
         preparedStatement.setString(1, post.getSubject());
         preparedStatement.setString(2, post.getContent());
@@ -109,6 +111,7 @@ public class PostComRepos {
         preparedStatement.setInt(5, 0);
         preparedStatement.setInt(6, post.getParent());
         preparedStatement.setTimestamp(7, post.getDate());
+        preparedStatement.setInt(8, post.isAds()?1:0);
         preparedStatement.executeUpdate();
     }
 

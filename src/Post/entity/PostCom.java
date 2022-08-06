@@ -20,6 +20,8 @@ public class PostCom {
 
     private Timestamp date;
 
+    private boolean isAds;
+
     private ArrayList<PostCom> children;
 
     public Integer getId() {
@@ -104,6 +106,14 @@ public class PostCom {
 
     public void setViews(int views) {
         this.views = views;
+    }
+
+    public boolean isAds() {
+        return isAds;
+    }
+
+    public void setAds(boolean isAds) {
+        this.isAds = isAds;
     }
 }
 

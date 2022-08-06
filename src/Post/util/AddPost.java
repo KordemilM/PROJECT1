@@ -35,6 +35,7 @@ public class AddPost {
             postCom.setDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
             postCom.setLikes(0);
             postCom.setParent(0);
+            postCom.setAds(user.getAccount()== 0);
             AppContext.getPostComRepos().addPost(postCom, connection);
         }
     }

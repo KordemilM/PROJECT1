@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2f6298-31e3-4ac1-b3ef-62de82870d49" name="Changes" comment="post">
-      <change afterPath="$PROJECT_DIR$/src/Post/util/ShowAd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/entity/PostCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/entity/PostCom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/repository/PostComRepos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Post/util/Explore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/Explore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Post/util/AddPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Post/util/AddPost.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659796015197</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="post">
+      <created>1659797071776</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1659797071776</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

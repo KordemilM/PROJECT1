@@ -2,6 +2,7 @@ package Post.util;
 
 import Post.repository.PostComRepos;
 import Post.repository.UserRepos;
+import entity.User;
 
 import java.util.Scanner;
 
